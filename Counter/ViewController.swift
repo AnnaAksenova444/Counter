@@ -7,24 +7,16 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
-   var count = 0
+    private var count = 0
     
-   @IBOutlet weak var textLabel: UILabel!
-   @IBOutlet weak var minusButton: UIButton!
-   @IBOutlet weak var plusButton: UIButton!
-   @IBOutlet weak var triangleButton: UIButton!
-   @IBOutlet weak var history: UITextView!
+    @IBOutlet weak private var textLabel: UILabel!
+    @IBOutlet weak private var minusButton: UIButton!
+    @IBOutlet weak private var plusButton: UIButton!
+    @IBOutlet weak private var triangleButton: UIButton!
+    @IBOutlet weak private var history: UITextView!
     
-   func dateFunc () -> String {
-        let currentDateTime = Date()
-        let formatter = DateFormatter()
-        formatter.timeStyle = .medium
-        formatter.dateStyle = .short
-        let dateTimeString = formatter.string(from: currentDateTime)
-        return dateTimeString
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,11 +25,18 @@ class ViewController: UIViewController {
         self.history.isEditable = false
         let range = NSRange(location: history.text.count - 1, length: 0)
         history.scrollRangeToVisible(range)
-        // Do any additional setup after loading the view.
     }
-
     
-    @IBAction func tapMinusButton(_ sender: Any) {
+    private func dateFunc () -> String {
+        let currentDateTime = Date()
+        let formatter = DateFormatter()
+        formatter.timeStyle = .medium
+        formatter.dateStyle = .short
+        let dateTimeString = formatter.string(from: currentDateTime)
+        return dateTimeString
+    }
+    
+    @IBAction private func tapMinusButton(_ sender: Any) {
         count -= 1
         if count < 0 {
             count = 0
@@ -49,14 +48,14 @@ class ViewController: UIViewController {
         
     }
     
-    @IBAction func tapPlusButton(_ sender: Any) {
+    @IBAction private func tapPlusButton(_ sender: Any) {
         count += 1
         textLabel.text = "Значение счётчика: \(count)"
         history.text = history.text + "\(dateFunc()) : значение изменено на +1" + "\n"
     }
     
     
-    @IBAction func tapTriangleButton(_ sender: Any) {
+    @IBAction private func tapTriangleButton(_ sender: Any) {
         count = 0
         textLabel.text = "Значение счётчика: \(count)"
         history.text = history.text + "\(dateFunc()) : значение сброшено" + "\n"
